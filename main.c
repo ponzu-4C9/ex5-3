@@ -16,6 +16,7 @@ void matmul(const double *A, const double *B, double *C, int m, int n, int p) {
         }
     }
 }
+
 int com(int x, int y, int z,const double *brain0, int p, double *brain1){
     double temp[p];
     double input[3] = {(double)x,(double)y,(double)z};
@@ -32,20 +33,30 @@ int com(int x, int y, int z,const double *brain0, int p, double *brain1){
     }
     return max_index;
 }
+
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
 
-    double brainA[3*3];
-    for (int i = 0; i < 3*3; i++)
+    // brain生成
+    int numofbrain = 10;
+    double brainA[numofbrain][3*10];
+    for(int i = 0; i < numofbrain; i++)
     {
-        brainA[i] = (double)rand() / RAND_MAX;
+        for (int j = 0; j < 3*10; j++)
+        {
+            brainA[i][j] = (double)rand() / RAND_MAX;
+        }
     }
-    double brainB[3*27];
-    for (int i = 0; i < 3*27; i++)
+    double brainB[numofbrain][10*27];
+    for(int i = 0; i < numofbrain; i++)
     {
-        brainB[i] = (double)rand() / RAND_MAX;
+        for (int j = 0; j < 10*27; j++)
+        {
+            brainB[i][j] = (double)rand() / RAND_MAX;
+        }
     }
+    
     int comhand = com(1,2,3,brainA,10,brainB);
     if (1 <= comhand && comhand <= 5){
         printf("左を%d減らす\n", comhand);
